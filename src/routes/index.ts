@@ -1,11 +1,16 @@
 import express, { Request, Response } from 'express';
 
 import isAuth from '../middlewares/isAuth';
+import hasRoles from '../middlewares/hasRoles';
 
 const router = express.Router();
 
-router.get('/', isAuth, (req: Request, res: Response) => {
+router.get('/', (req, res: Response) => {
     res.send('Hello');
 })
 
-export default router;
+router.get('/secured', isAuth, hasRoles(['admin', 'student']), (req: Request, res: Response) => {
+    res.send('Admin or Student');
+})
+
+export default router;  
