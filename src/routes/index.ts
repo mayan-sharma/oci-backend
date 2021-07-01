@@ -13,4 +13,8 @@ router.get('/secured', isAuth, hasRoles(['admin', 'student']), (req: Request, re
     res.send('Admin or Student');
 })
 
+router.post('/', (req, res) => {
+    res.send(req.body);
+})
+
 export default router;  
