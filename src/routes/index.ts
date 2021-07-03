@@ -1,20 +1,9 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 
-import isAuth from '../middlewares/isAuth';
-import hasRoles from '../middlewares/hasRoles';
+import userRouter from './users';
 
 const router = express.Router();
 
-router.get('/', (req, res: Response) => {
-    res.send('Hello');
-})
-
-router.get('/secured', isAuth, hasRoles(['admin', 'student']), (req: Request, res: Response) => {
-    res.send('Admin or Student');
-})
-
-router.post('/', (req, res) => {
-    res.send(req.body);
-})
+router.use('/user', userRouter);
 
 export default router;  
